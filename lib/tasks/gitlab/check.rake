@@ -501,7 +501,7 @@ namespace :gitlab do
         return
       end
 
-      if `stat --printf %a #{gitolite_config_path}` == "750"
+      if `stat -f %Lp #{gitolite_config_path}`.chop == "750"
         puts "yes".green
       else
         puts "no".red
@@ -525,8 +525,8 @@ namespace :gitlab do
         return
       end
 
-      if `stat --printf %U #{gitolite_config_path}` == gitolite_ssh_user && # user
-         `stat --printf %G #{gitolite_config_path}` == gitolite_ssh_user #group
+      if `stat -f %Su #{gitolite_config_path}`.chop == gitolite_ssh_user && # user
+         `stat -f %Sg #{gitolite_config_path}`.chop == gitolite_ssh_user #group
         puts "yes".green
       else
         puts "no".red
@@ -701,7 +701,7 @@ namespace :gitlab do
         return
       end
 
-      if `stat --printf %a #{repo_base_path}` == "6770"
+      if `stat -f %p #{repo_base_path}`.chop == "44770"
         puts "yes".green
       else
         puts "no".red
@@ -726,8 +726,8 @@ namespace :gitlab do
         return
       end
 
-      if `stat --printf %U #{repo_base_path}` == gitolite_ssh_user && # user
-         `stat --printf %G #{repo_base_path}` == gitolite_ssh_user #group
+      if `stat -f %Su #{repo_base_path}`.chop == gitolite_ssh_user && # user
+         `stat -f %Sg #{repo_base_path}`.chop == gitolite_ssh_user #group
         puts "yes".green
       else
         puts "no".red
