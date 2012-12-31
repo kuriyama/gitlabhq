@@ -12,12 +12,14 @@ namespace :gitlab do
                     debian_version = File.read('/etc/debian_version')
                     "Debian #{debian_version}"
                   end
+      os_name ||= run("uname -o")
       os_name.squish!
 
       # check if there is an RVM environment
       rvm_version = run_and_match("rvm --version", /[\d\.]+/).try(:to_s)
       # check Ruby version
       ruby_version = run_and_match("ruby --version", /[\d\.p]+/).try(:to_s)
+      ruby_version ||= run_and_match("ruby19 --version", /[\d\.p]+/).try(:to_s)
       # check Gem version
       gem_version = run("gem --version")
       # check Bundler version
