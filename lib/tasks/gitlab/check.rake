@@ -20,8 +20,8 @@ namespace :gitlab do
       check_gitlab_config_not_outdated
       check_log_writable
       check_tmp_writable
-      check_init_script_exists
-      check_init_script_up_to_date
+#      check_init_script_exists
+#      check_init_script_up_to_date
       check_satellites_exist
 
       finished_checking "GitLab"
