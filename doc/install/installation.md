@@ -270,6 +270,18 @@ used for the `email.from` setting in `config/gitlab.yml`)
     sudo -u gitlab -H bundle exec rake gitlab:app:setup RAILS_ENV=production
 
 
+## Install Init Script
+
+Download the init script (will be /etc/init.d/gitlab):
+
+    sudo wget https://raw.github.com/gitlabhq/gitlab-recipes/4-0-stable/init.d/gitlab -P /etc/init.d/
+    sudo chmod +x /etc/init.d/gitlab
+
+Make GitLab start on boot:
+
+    sudo update-rc.d gitlab defaults 21
+
+
 ## Check Application Status
 
 Check if GitLab and its environment is configured correctly:
@@ -280,23 +292,11 @@ To make sure you didn't miss anything run a more thorough check with:
 
     sudo -u gitlab -H bundle exec rake gitlab:check RAILS_ENV=production
 
-If you are all green: congratulations, you successfully installed GitLab!
-Although this is the case, there are still a few steps to go.
+If all items are green, then congratulations on successfully installing GitLab!
+However there are still a few steps left.
 
 
-## Install Init Script
-
-Download the init script (will be /etc/init.d/gitlab):
-
-    sudo wget https://raw.github.com/gitlabhq/gitlab-recipes/master/init.d/gitlab -P /etc/init.d/
-    sudo chmod +x /etc/init.d/gitlab
-
-Make GitLab start on boot:
-
-    sudo update-rc.d gitlab defaults 21
-
-
-Start your GitLab instance:
+## Start Your GitLab Instance
 
     sudo service gitlab start
     # or
@@ -316,7 +316,7 @@ If you can't or don't want to use Nginx as your web server, have a look at the
 
 Download an example site config:
 
-    sudo wget https://raw.github.com/gitlabhq/gitlab-recipes/master/nginx/gitlab -P /etc/nginx/sites-available/
+    sudo wget https://raw.github.com/gitlabhq/gitlab-recipes/4-0-stable/nginx/gitlab -P /etc/nginx/sites-available/
     sudo ln -s /etc/nginx/sites-available/gitlab /etc/nginx/sites-enabled/gitlab
 
 Make sure to edit the config file to match your setup:
